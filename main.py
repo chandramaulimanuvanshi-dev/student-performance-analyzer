@@ -113,6 +113,78 @@ def subject_topper():
         print("Subject:", subject)
         print("Name:", topper["name"])
         print("Marks:", highest_marks)
+# Class Average 
+def class_average():
+    if not students:
+        print("No Students Record Found!")
+    percentages=[]
+    for student in students:
+        percentage=calculate_percentage(student)
+        percentages.append(percentage)
+    average=sum(percentages)/len(percentages)
+    print("\nClass Average:", round(average, 2))
+
+# Student Ranking 
+def rank_students():
+    if not students:
+        print("No Student Record Found!")
+        return 
+    ranked_students=sorted(students,
+                           key=calculate_percentage,
+                            reverse=True )
+    print("\nStudent Ranking")
+
+    rank=1
+
+    for student in ranked_students:
+        percentage=calculate_percentage(student)
+        print(
+            rank,
+            student["name"],
+            "-",
+            round(percentage, 2),
+            "%"
+        )
+
+        rank+=1
+
+# Update Student Marks
+def update_student_marks():
+    if not students:
+        print("No Students Record Found!")
+        return
+    name=input("\n Enter student name: ").strip().lower()
+    for student in students:
+        if student["name"].lower()==name:
+            print("\n Current Marks:")
+            for subject, mark in student['marks'].items():
+                print(subject,":",mark)
+            subject=input("\n Enter subject to update:").strip().title()
+
+            if subject not in student["marks"]:
+                print("Subject not found!")
+                return
+            new_mark=input("Enter new mark:").strip()
+            if not new_mark.isdigit():
+                print("Marks must be a number!")
+                return
+            
+            new_mark=int(new_mark)
+
+            if new_mark < 0 or new_mark > 100:
+                print("Marks must be between 0 and 100.")
+                return
+
+            student["marks"][subject] = new_mark
+
+            print("\nMarks updated successfully.")
+            print(subject, ":", new_mark)
+
+            return
+
+    print("Student not found.")
+
+
 
 
 
@@ -127,7 +199,10 @@ def main():
         print("4. Show Percentage")
         print("5. Show Class Topper")
         print("6. Show Subject Topper")
-        print("7. Exit")
+        print("7. Show Class Average")
+        print("8. Show Student Ranking")
+        print("9. Update Student Marks")
+        print("10. Exit")
 
         choice = input("Enter your choice: ")
 
@@ -158,8 +233,15 @@ def main():
              class_topper()
         elif choice=="6":
             subject_topper()
+        elif choice=="7":
+            class_average()
 
-        elif choice == "7":
+        elif choice == "8":
+            rank_students()
+        elif choice=="9":
+            update_student_marks()
+
+        elif choice == "10":
             print("Program ended.")
             break
 
