@@ -1,5 +1,30 @@
 #Add Student 
-students=[]
+students = [
+    {
+        "name": "Aman",
+        "marks": {
+            "Physics": 78,
+            "Chemistry": 82,
+            "Maths": 91
+        }
+    },
+    {
+        "name": "Riya",
+        "marks": {
+            "Physics": 95,
+            "Chemistry": 79,
+            "Maths": 88
+        }
+    },
+    {
+        "name": "Kabir",
+        "marks": {
+            "Physics": 84,
+            "Chemistry": 96,
+            "Maths": 90
+        }
+    }
+]
 def add_student():
     name=input("Enter student name: ")
     marks_input=input("Enter Physics, Chemistry  and Maths Marks: ")
@@ -68,6 +93,29 @@ def class_topper():
     print("Percentage:", round(Highest_percentage, 2))
     print("Grade:", calculate_grade(Highest_percentage))
 
+# Subject topper
+def subject_topper():
+    if not students:
+        print("No Students Record Found!")
+        return
+    subject= input("Enter subjcet name: ").strip().title()
+    topper= None 
+    highest_marks=-1
+    for student in students:
+        marks=student['marks'].get(subject)
+        if marks is not None and  marks>highest_marks:
+            topper=student
+            highest_marks=marks 
+    if topper is None:
+        print("Subject Not Found!")
+    else:
+        print("\nSubject Topper")
+        print("Subject:", subject)
+        print("Name:", topper["name"])
+        print("Marks:", highest_marks)
+
+
+
 
 # Menu 
 def main():
@@ -78,7 +126,8 @@ def main():
         print("3. Search Student")
         print("4. Show Percentage")
         print("5. Show Class Topper")
-        print("6. Exit")
+        print("6. Show Subject Topper")
+        print("7. Exit")
 
         choice = input("Enter your choice: ")
 
@@ -107,8 +156,10 @@ def main():
                                  )
         elif choice=="5":
              class_topper()
+        elif choice=="6":
+            subject_topper()
 
-        elif choice == "6":
+        elif choice == "7":
             print("Program ended.")
             break
 
