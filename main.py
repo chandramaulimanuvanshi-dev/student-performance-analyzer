@@ -184,6 +184,29 @@ def update_student_marks():
 
     print("Student not found.")
 
+# Delete Student 
+def delete_students():
+    if not students:
+        print("No Students Record found!")
+        return
+    name=input("\n Enter student name to delete:").strip().lower()
+
+    for student in students:
+        if student["name"].lower()==name:
+            print("\n Student Found:")
+            print("Name ;", student['name'])
+            print("Marks:",student['marks'])
+
+            confirm=input("Are you sure you want to delete this student?(yes/no): ").strip().lower()
+            if confirm=="yes":
+                students.remove(student)
+                print("Student deleted sucessfully.")
+            else:
+                print("Deletion canceled.")
+            return 
+    print("Student Not Found!")
+
+
 
 
 
@@ -202,7 +225,8 @@ def main():
         print("7. Show Class Average")
         print("8. Show Student Ranking")
         print("9. Update Student Marks")
-        print("10. Exit")
+        print("10. Delete Student")
+        print("11. Exit")
 
         choice = input("Enter your choice: ")
 
@@ -240,8 +264,10 @@ def main():
             rank_students()
         elif choice=="9":
             update_student_marks()
+        elif choice=="10":
+            delete_students()
 
-        elif choice == "10":
+        elif choice == "11":
             print("Program ended.")
             break
 
