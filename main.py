@@ -34,8 +34,23 @@ def search_student():
 
 # Calculate Percentage 
 def calculate_percentage(student):
-     marks=student['marks'].values()
-     return sum(marks)/len(marks)
+    marks = student["marks"].values()
+    return sum(marks) / len(marks)
+# Calculate grade
+
+def calculate_grade(percentage):
+    if percentage >= 90:
+        return "A+"
+    elif percentage >= 80:
+        return "A"
+    elif percentage >= 70:
+        return "B"
+    elif percentage >= 60:
+        return "C"
+    elif percentage >= 50:
+        return "D"
+    else:
+        return "F"
 
 # Menu 
 def main():
@@ -63,7 +78,15 @@ def main():
             else:
                 for student in students:
                     percentage = calculate_percentage(student)
-                    print(student["name"], ":", percentage)
+                    grade = calculate_grade(percentage)
+
+                    print(
+                            student["name"],
+                            "- Percentage:",
+                            round(percentage, 2),
+                            "- Grade:",
+                            grade
+                                 )
 
         elif choice == "5":
             print("Program ended.")
