@@ -51,6 +51,23 @@ def calculate_grade(percentage):
         return "D"
     else:
         return "F"
+# Class Topper
+def class_topper():
+    if not students:
+        print("No Students Record Found!")
+        return 
+    topper=students[0]
+    Highest_percentage=calculate_percentage(topper)
+    for student in students[1:]:
+        percentage=calculate_percentage(student)
+        if percentage>Highest_percentage:
+            topper=student 
+            Highest_percentage=percentage
+    print("\nClass Topper")
+    print("Name:", topper["name"])
+    print("Percentage:", round(Highest_percentage, 2))
+    print("Grade:", calculate_grade(Highest_percentage))
+
 
 # Menu 
 def main():
@@ -60,7 +77,8 @@ def main():
         print("2. View Students")
         print("3. Search Student")
         print("4. Show Percentage")
-        print("5. Exit")
+        print("5. Show Class Topper")
+        print("6. Exit")
 
         choice = input("Enter your choice: ")
 
@@ -87,8 +105,10 @@ def main():
                             "- Grade:",
                             grade
                                  )
+        elif choice=="5":
+             class_topper()
 
-        elif choice == "5":
+        elif choice == "6":
             print("Program ended.")
             break
 
